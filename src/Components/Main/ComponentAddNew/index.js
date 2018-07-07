@@ -37,7 +37,6 @@ class ComponentAddNew extends Component {
   render() {
     const { blogTitle, blogContent, blogDescription } = this.state;
     const { categoryList } = this.props;
-    console.log(this.state);
     const rendercategoryList = categoryList.map(category => (
       <label key={category} htmlFor={category} className={styles.Category}>
         <input
