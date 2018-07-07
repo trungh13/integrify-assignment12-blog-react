@@ -1,8 +1,9 @@
 .blogPost {
-  width: 100%;
+  width: 80%;
+  margin: auto;
 }
 .blogHeading {
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: 500;
   text-transform: uppercase;
   text-align: center;
@@ -19,7 +20,7 @@
   display: flex;
   justify-content: flex-end;
   padding-top: 25px;
-    margin-top: 25px;
+  margin-top: 25px;
 }
 .blogCategory {
   padding: 7px 15px;

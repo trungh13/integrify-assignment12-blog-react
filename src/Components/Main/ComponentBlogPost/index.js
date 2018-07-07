@@ -2,33 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styles from './index.css';
+import Button from '../../shared/ComponentButton';
 
 const ComponentBlogPost = ({ blogs, blogPostDelete, match }) => {
   const currentId = Number(match.params.id);
   const blogPost = blogs[currentId];
   const {
-    blogTitle, blogContent, blogPhoto, categories,
+    blogTitle, blogContent, categories, id,
   } = blogPost;
-  let blogPhotoURL = '';
-  if (Object.keys(blogPhoto).length !== 0) {
-    blogPhotoURL = `https:${blogPhoto.fields.file.url}`;
-  }
   const renderCategories = categories.map(category => (
-    <div key={category.fields.category} className={styles.blogCategory}>
-      {category.fields.category}
+    <div key={id} className={styles.blogCategory}>
+      {category}
     </div>
   ));
   return (
     <div className={styles.blogPost}>
       <h1 className={styles.blogHeading}>{blogTitle}</h1>
-      {blogPhotoURL !== '' && <img className={styles.blogPhoto} src={blogPhotoURL} alt="" />}
       <div className={styles.blogBody}>
         <div className={styles.blogContent}>{blogContent}</div>
         {categories.length !== 0 && <div className={styles.blogCategories}>{renderCategories}</div>}
         <Link to="/">
-          <button type="button" onClick={() => blogPostDelete(currentId)}>
-            Delete
-          </button>
+          <Button onClick={() => blogPostDelete(currentId)} buttonName="Delete" />
         </Link>
       </div>
     </div>
