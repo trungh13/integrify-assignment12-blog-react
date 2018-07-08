@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 
 import styles from './index.css';
-import Blog from './ComponentBlog';
+import Blog from '../../../Components/ComponentBlog';
 
 const ComponentBlogList = ({ blogs }) => {
   if (Object.keys(blogs).length !== 0) {

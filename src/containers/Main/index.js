@@ -4,7 +4,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import styles from './index.css';
 import ComponentBlogList from './ComponentBlogList';
 import ComponentBlogPost from './ComponentBlogPost';
-import ComponentAddNew from './ComponentAddNew';
+import ComponentForm from './ComponentForm';
 
 export default withRouter(
   class Main extends React.Component {
@@ -74,7 +74,7 @@ export default withRouter(
               exact
               path="/posts/newpost"
               render={props => (
-                <ComponentAddNew
+                <ComponentForm
                   {...props}
                   addNewSubmit={this.addNewSubmit}
                   newId={Object.keys(blogs).length + 1}

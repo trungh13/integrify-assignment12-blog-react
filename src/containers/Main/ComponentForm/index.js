@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Button from '../../shared/ComponentButton';
+import Button from '../../../Components/ComponentButton';
 import styles from './index.css';
 
 class ComponentAddNew extends Component {
-  formRef = React.createRef();
-
   state = {
     blogTitle: '',
     blogContent: '',

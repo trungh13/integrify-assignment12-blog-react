@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styles from './index.css';
-import Button from '../../shared/ComponentButton';
+import Button from '../../../Components/ComponentButton';
 
 const ComponentBlogPost = ({ blogs, blogPostDelete, match }) => {
   const currentId = Number(match.params.id);
