@@ -41,21 +41,22 @@ const initialStateBlogs = {
 };
 
 const reducer = (state = initialStateBlogs, action) => {
+  const { blogs } = state;
   switch (action.type) {
     case 'ADD_BLOG': {
-      const newbloglist = { ...state.blogs };
-      newbloglist[Object.keys(newbloglist).length + 1] = action.data;
-      return { blogs: { ...newbloglist } };
+      const newbloglist = { ...blogs };
+      newbloglist[action.data.id] = action.data;
+      return { ...state, blogs: { ...newbloglist } };
     }
     case 'DEL_BLOG': {
-      const newbloglist = { ...state.blogs };
-      delete newbloglist[action.id];
-      return { blogs: { ...newbloglist } };
+      const newbloglist = { ...blogs };
+      delete newbloglist[action.currentId];
+      return { ...state, blogs: { ...newbloglist } };
     }
     case 'EDIT_BLOG': {
-      const newbloglist = { ...state.blogs };
+      const newbloglist = { ...blogs };
       delete newbloglist[action.id];
-      return { blogs: { ...newbloglist } };
+      return { ...state, blogs: { ...newbloglist } };
     }
     default:
       return state;

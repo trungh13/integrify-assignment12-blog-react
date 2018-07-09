@@ -9,11 +9,9 @@ const ComponentBlogPost = (props) => {
   const { blogs, match, blogPostDelete } = props;
   const currentId = Number(match.params.id);
   const blogPost = blogs[currentId];
-  const {
-    blogTitle, blogContent, categories, id,
-  } = blogPost;
+  const { blogTitle, blogContent, categories } = blogPost;
   const renderCategories = categories.map(category => (
-    <div key={id} className={styles.blogCategory}>
+    <div key={category} className={styles.blogCategory}>
       {category}
     </div>
   ));

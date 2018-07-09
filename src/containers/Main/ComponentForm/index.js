@@ -40,7 +40,7 @@ class ComponentForm extends Component {
 
   handleSubmit = () => {
     const { handleSubmit, blogs } = this.props;
-    const newId = Object.keys(blogs).length + 1;
+    const newId = blogs[Object.keys(blogs).length - 1].id + 1;
     const data = { ...this.state, id: newId };
     handleSubmit(data);
     this.handleClose();
@@ -56,7 +56,7 @@ class ComponentForm extends Component {
       blogTitle, blogContent, blogDescription, categories,
     } = this.state;
     const { categories: categoriesList } = this.props;
-    const rendercategoryList = categoriesList.map(category => (
+    const renderCategoryList = categoriesList.map(category => (
       <label key={category} htmlFor={category} className={styles.Category}>
         <input
           type="checkbox"
@@ -107,7 +107,7 @@ class ComponentForm extends Component {
         <label htmlFor="BlogCategories">
           Categories
           <div id="BlogCategories" className={styles.CategoryList}>
-            {rendercategoryList}
+            {renderCategoryList}
           </div>
         </label>
         <Button buttonName="Submit" onClick={this.handleSubmit} />
