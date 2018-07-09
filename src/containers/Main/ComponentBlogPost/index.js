@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import styles from './index.css';
 import Button from '../../../Components/ComponentButton';
 
-const ComponentBlogPost = ({ blogs, blogPostDelete, match }) => {
+const ComponentBlogPost = (props) => {
+  const { blogs, match, blogPostDelete } = props;
   const currentId = Number(match.params.id);
   const blogPost = blogs[currentId];
   const {
@@ -39,4 +41,13 @@ ComponentBlogPost.propTypes = {
   blogPostDelete: PropTypes.func.isRequired,
 };
 
-export default ComponentBlogPost;
+const mapStateToProps = state => ({
+  blogs: state.blogs,
+});
+const mapDispatchToProps = dispatch => ({
+  blogPostDelete: currentId => dispatch({ type: 'DEL_BLOG', currentId }),
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ComponentBlogPost);

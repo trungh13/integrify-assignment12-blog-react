@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
-
+import { connect } from 'react-redux';
 import styles from './index.css';
 import Blog from '../../../Components/ComponentBlog';
 
@@ -19,16 +19,11 @@ const ComponentBlogList = ({ blogs }) => {
 };
 
 ComponentBlogList.propTypes = {
-  blogs: PropTypes.shape(
-    PropTypes.shape({
-      blogTitle: PropTypes.string.isRequired,
-      blogDescription: PropTypes.string.isRequired,
-    }).isRequired,
-  ),
+  blogs: PropTypes.shape({}).isRequired,
 };
 
-ComponentBlogList.defaultProps = {
-  blogs: {},
-};
+const mapStateToProps = state => ({
+  blogs: state.blogs,
+});
 
-export default withRouter(ComponentBlogList);
+export default connect(mapStateToProps)(withRouter(ComponentBlogList));

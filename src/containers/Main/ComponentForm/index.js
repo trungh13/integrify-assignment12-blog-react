@@ -1,15 +1,32 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Button from '../../../Components/ComponentButton';
 import styles from './index.css';
 
-class ComponentAddNew extends Component {
-  state = {
-    blogTitle: '',
-    blogContent: '',
-    blogDescription: '',
-    categories: [],
-    id: { ...this.props }.newId,
+class ComponentForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      blogTitle: '',
+      blogContent: '',
+      blogDescription: '',
+      categories: [],
+      id: 0,
+    };
+  }
+
+  componentDidMount() {
+    const { match } = this.props;
+    this.getData(match.params.id);
+  }
+
+  getData = (id) => {
+    const { blogs } = this.props;
+    if (id) {
+      const currentId = Object.keys(blogs).find(blogId => blogId === id);
+      this.setState({ ...blogs[currentId] });
+    }
   };
 
   handleChange = (event) => {
@@ -22,8 +39,10 @@ class ComponentAddNew extends Component {
   };
 
   handleSubmit = () => {
-    const { addNewSubmit } = this.props;
-    addNewSubmit({ ...this.state });
+    const { handleSubmit, blogs } = this.props;
+    const newId = Object.keys(blogs).length + 1;
+    const data = { ...this.state, id: newId };
+    handleSubmit(data);
     this.handleClose();
   };
 
@@ -33,13 +52,16 @@ class ComponentAddNew extends Component {
   };
 
   render() {
-    const { blogTitle, blogContent, blogDescription } = this.state;
-    const { categoryList } = this.props;
-    const rendercategoryList = categoryList.map(category => (
+    const {
+      blogTitle, blogContent, blogDescription, categories,
+    } = this.state;
+    const { categories: categoriesList } = this.props;
+    const rendercategoryList = categoriesList.map(category => (
       <label key={category} htmlFor={category} className={styles.Category}>
         <input
           type="checkbox"
           id={category}
+          checked={categories.includes(category)}
           name="categories"
           value={category}
           onChange={this.handleChange}
@@ -95,11 +117,26 @@ class ComponentAddNew extends Component {
   }
 }
 
-ComponentAddNew.propTypes = {
-  addNewSubmit: PropTypes.func.isRequired,
+ComponentForm.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
-  categoryList: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({}).isRequired,
+  }).isRequired,
+  blogs: PropTypes.shape(PropTypes.shape({}).isRequired).isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  categories: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
-export default ComponentAddNew;
+
+const mapStateToProps = state => ({
+  blogs: state.blogs,
+  categories: state.categories,
+});
+const mapDispatchToProps = dispatch => ({
+  handleSubmit: data => dispatch({ type: 'ADD_BLOG', data }),
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ComponentForm);

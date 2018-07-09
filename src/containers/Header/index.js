@@ -8,12 +8,12 @@ const Header = () => (
     <h1>React-Blog</h1>
     <ul className={styles.ulNavLink}>
       <li className={styles.liNavLink}>
-        <NavLink disabled activeClassName={styles.activeNavLink} exact to="/">
+        <NavLink activeClassName={styles.activeNavLink} exact to="/">
           Blog List
         </NavLink>
       </li>
       <li className={styles.liNavLink}>
-        <NavLink activeClassName={styles.activeNavLink} exact to="/posts/newpost">
+        <NavLink activeClassName={styles.activeNavLink} exact to="/new-post">
           Add new blog post
         </NavLink>
       </li>

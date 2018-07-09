@@ -4,11 +4,9 @@ import PropTypes from 'prop-types';
 import styles from './index.css';
 
 const ComponentBlog = (props) => {
-  const {
-    blogTitle, blogDescription, categories, id,
-  } = props;
+  const { blogTitle, blogDescription, categories } = props;
   const renderCategories = categories.map(category => (
-    <div key={id} className={styles.blogCategory}>
+    <div key={category} className={styles.blogCategory}>
       {category}
     </div>
   ));
@@ -27,14 +25,8 @@ const ComponentBlog = (props) => {
   );
 };
 ComponentBlog.propTypes = {
-  blogTitle: PropTypes.string,
-  blogDescription: PropTypes.string,
-  categories: PropTypes.arrayOf(PropTypes.string.isRequired),
-  id: PropTypes.number.isRequired,
-};
-ComponentBlog.defaultProps = {
-  blogTitle: '',
-  blogDescription: '',
-  categories: [],
+  blogTitle: PropTypes.string.isRequired,
+  blogDescription: PropTypes.string.isRequired,
+  categories: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 export default ComponentBlog;

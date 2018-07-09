@@ -1,15 +1,17 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import styles from './App.css';
 import Header from './containers/Header';
 import Main from './containers/Main';
 import Footer from './containers/Footer';
 
 const App = () => (
+  <Router>
     <div className={styles.App}>
       <Header />
       <Main />
       <Footer />
     </div>
+  </Router>
 );
-export default withRouter(App);
+export default App;
