@@ -18,9 +18,12 @@ const ComponentBlogPost = (props) => {
   return (
     <div className={styles.blogPost}>
       <h1 className={styles.blogHeading}>{blogTitle}</h1>
+      {categories.length !== 0 && <div className={styles.blogCategories}>{renderCategories}</div>}
       <div className={styles.blogBody}>
         <div className={styles.blogContent}>{blogContent}</div>
-        {categories.length !== 0 && <div className={styles.blogCategories}>{renderCategories}</div>}
+        <Link to={`/edit-post/${currentId}`}>
+          <Button buttonName="Edit" />
+        </Link>
         <Link to="/">
           <Button onClick={() => blogPostDelete(currentId)} buttonName="Delete" />
         </Link>

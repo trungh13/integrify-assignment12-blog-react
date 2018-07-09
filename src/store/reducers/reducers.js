@@ -55,7 +55,7 @@ const reducer = (state = initialStateBlogs, action) => {
     }
     case 'EDIT_BLOG': {
       const newbloglist = { ...blogs };
-      delete newbloglist[action.id];
+      newbloglist[action.data.id] = action.data;
       return { ...state, blogs: { ...newbloglist } };
     }
     default:

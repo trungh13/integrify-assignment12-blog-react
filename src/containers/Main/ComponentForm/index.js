@@ -13,6 +13,7 @@ class ComponentForm extends Component {
       blogDescription: '',
       categories: [],
       id: 0,
+      editing: false,
     };
   }
 
@@ -25,7 +26,7 @@ class ComponentForm extends Component {
     const { blogs } = this.props;
     if (id) {
       const currentId = Object.keys(blogs).find(blogId => blogId === id);
-      this.setState({ ...blogs[currentId] });
+      this.setState({ ...blogs[currentId], editing: true });
     }
   };
 
@@ -39,10 +40,23 @@ class ComponentForm extends Component {
   };
 
   handleSubmit = () => {
-    const { handleSubmit, blogs } = this.props;
-    const newId = blogs[Object.keys(blogs).length - 1].id + 1;
-    const data = { ...this.state, id: newId };
-    handleSubmit(data);
+    const { handleSubmit, handleEdit, blogs } = this.props;
+    const {
+      blogTitle, blogContent, blogDescription, categories, id, editing,
+    } = this.state;
+    if (!editing) {
+      const newId = blogs[Object.keys(blogs).length - 1].id + 1;
+      const data = { ...this.state, id: newId };
+      handleSubmit(data);
+    } else {
+      handleEdit({
+        id,
+        blogTitle,
+        blogContent,
+        blogDescription,
+        categories,
+      });
+    }
     this.handleClose();
   };
 
@@ -126,6 +140,7 @@ ComponentForm.propTypes = {
   }).isRequired,
   blogs: PropTypes.shape(PropTypes.shape({}).isRequired).isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  handleEdit: PropTypes.func.isRequired,
   categories: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
@@ -135,6 +150,7 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
   handleSubmit: data => dispatch({ type: 'ADD_BLOG', data }),
+  handleEdit: data => dispatch({ type: 'EDIT_BLOG', data }),
 });
 export default connect(
   mapStateToProps,

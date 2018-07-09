@@ -1,6 +1,7 @@
 .blogPost {
-  width: 80%;
+  width: 90%;
   margin: auto;
+  min-width: 600px;
 }
 .blogHeading {
   font-size: 3rem;
@@ -16,11 +17,8 @@
   padding: 50px;
 }
 .blogCategories {
-  border-top: 1px solid var(--color-2);
   display: flex;
-  justify-content: flex-end;
-  padding-top: 25px;
-  margin-top: 25px;
+  justify-content: center;
 }
 .blogCategory {
   padding: 7px 15px;
