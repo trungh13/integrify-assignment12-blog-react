@@ -1,34 +1,23 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Button from '../../../Components/ComponentButton';
+import Button from '../ComponentButton';
 import styles from './index.css';
 
 class ComponentForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      blogTitle: '',
-      blogContent: '',
-      blogDescription: '',
-      categories: [],
-      id: 0,
-      editing: false,
-    };
-  }
+  state = {
+    blogTitle: '',
+    blogContent: '',
+    blogDescription: '',
+    categories: [],
+    id: 0,
+  };
 
   componentDidMount() {
-    const { match } = this.props;
-    this.getData(match.params.id);
+    const { blogPost } = this.props;
+    this.setState({
+      ...blogPost,
+    });
   }
-
-  getData = (id) => {
-    const { blogs } = this.props;
-    if (id) {
-      const currentId = Object.keys(blogs).find(blogId => blogId === id);
-      this.setState({ ...blogs[currentId], editing: true });
-    }
-  };
 
   handleChange = (event) => {
     const elName = event.target.name;
@@ -40,23 +29,8 @@ class ComponentForm extends Component {
   };
 
   handleSubmit = () => {
-    const { handleSubmit, handleEdit, blogs } = this.props;
-    const {
-      blogTitle, blogContent, blogDescription, categories, id, editing,
-    } = this.state;
-    if (!editing) {
-      const newId = blogs[Object.keys(blogs).length - 1].id + 1;
-      const data = { ...this.state, id: newId };
-      handleSubmit(data);
-    } else {
-      handleEdit({
-        id,
-        blogTitle,
-        blogContent,
-        blogDescription,
-        categories,
-      });
-    }
+    const { submitHandler } = this.props;
+    submitHandler(this.state);
     this.handleClose();
   };
 
@@ -135,24 +109,15 @@ ComponentForm.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
-  match: PropTypes.shape({
-    params: PropTypes.shape({}).isRequired,
+  blogPost: PropTypes.shape({
+    blogTitle: PropTypes.string.isRequired,
+    blogDescription: PropTypes.string.isRequired,
+    blogContent: PropTypes.string.isRequired,
+    categories: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    id: PropTypes.number.isRequired,
   }).isRequired,
-  blogs: PropTypes.shape(PropTypes.shape({}).isRequired).isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  handleEdit: PropTypes.func.isRequired,
   categories: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  submitHandler: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  blogs: state.blogs,
-  categories: state.categories,
-});
-const mapDispatchToProps = dispatch => ({
-  handleSubmit: data => dispatch({ type: 'ADD_BLOG', data }),
-  handleEdit: data => dispatch({ type: 'EDIT_BLOG', data }),
-});
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ComponentForm);
+export default ComponentForm;

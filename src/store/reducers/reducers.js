@@ -18,6 +18,6 @@ const blogsReducer = (state = {}, action) => {
   }
 };
 
-const catReducer = (state = []) => state;
+const categoriesReducer = (state = []) => state;
 
-export default combineReducers({ blogs: blogsReducer, categories: catReducer });
+export default combineReducers({ blogs: blogsReducer, categories: categoriesReducer });
