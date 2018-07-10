@@ -10,6 +10,13 @@ class ComponentForm extends Component {
     blogDescription: '',
     categories: [],
     id: 0,
+    isTouch: {
+      blogTitle: false,
+      blogContent: false,
+      blogDescription: false,
+      categories: false,
+      id: false,
+    },
   };
 
   componentDidMount() {
@@ -30,7 +37,16 @@ class ComponentForm extends Component {
 
   handleSubmit = () => {
     const { submitHandler } = this.props;
-    submitHandler(this.state);
+    const {
+      blogTitle, blogContent, blogDescription, categories, id,
+    } = this.state;
+    submitHandler({
+      blogTitle,
+      blogContent,
+      blogDescription,
+      categories,
+      id,
+    });
     this.handleClose();
   };
 
@@ -39,11 +55,40 @@ class ComponentForm extends Component {
     history.push('/');
   };
 
+  validation = (blogTitle, blogContent, blogDescription, categories) => {
+    const textareaRegex = /^[A-Za-z0-9.[$&+,:;=?@#|'<>.^*()%!-\] \n]{5,1000}$/;
+    const textRegex = /^[A-Za-z0-9.[$&+,:;=?@#|'<>.^*()%!-\] \n]{5,100}$/;
+    const errors = {
+      blogTitle: textRegex.test(blogTitle),
+      blogContent: textRegex.test(blogContent),
+      blogDescription: textareaRegex.test(blogDescription),
+      categories: categories.length !== 0,
+    };
+    return errors;
+  };
+
+  isTouch = (event) => {
+    const elName = event.target.name;
+    if (event.target.type !== 'checkbox') {
+      this.setState(prevState => ({
+        ...prevState,
+        isTouch: { ...prevState.isTouch, [elName]: true },
+      }));
+    } else {
+      this.setState(prevState => ({
+        ...prevState,
+        isTouch: { ...prevState.isTouch, categories: true },
+      }));
+    }
+  };
+
   render() {
     const {
-      blogTitle, blogContent, blogDescription, categories,
+      blogTitle, blogContent, blogDescription, categories, isTouch,
     } = this.state;
-    const { categories: categoriesList } = this.props;
+    const errors = this.validation(blogTitle, blogContent, blogDescription, categories);
+    const { categories: categoriesList, formHeading } = this.props;
+
     const renderCategoryList = categoriesList.map(category => (
       <label key={category} htmlFor={category} className={styles.Category}>
         <input
@@ -53,51 +98,74 @@ class ComponentForm extends Component {
           name="categories"
           value={category}
           onChange={this.handleChange}
+          onFocus={this.isTouch}
         />{' '}
         {category}
       </label>
     ));
+
     return (
       <form className={styles.FormAddNew}>
-        <h2 className={styles.FormHeading}>Add new Blogpost</h2>
-        <label htmlFor="blogTitle">
-          Blog Title
-          <input
-            type="text"
-            id="blogTitle"
-            name="blogTitle"
-            value={blogTitle}
-            onChange={this.handleChange}
-          />
-        </label>
-        <label htmlFor="blogDescription">
-          Blog Description
-          <input
-            type="text"
-            id="blogDescription"
-            name="blogDescription"
-            value={blogDescription}
-            onChange={this.handleChange}
-          />
-        </label>
-        <label htmlFor="blogContent">
-          Blog Content
-          <textarea
-            rows="4"
-            cols="50"
-            type="text"
-            id="blogContent"
-            name="blogContent"
-            value={blogContent}
-            onChange={this.handleChange}
-          />
-        </label>
-        <label htmlFor="BlogCategories">
-          Categories
-          <div id="BlogCategories" className={styles.CategoryList}>
-            {renderCategoryList}
+        <h2 className={styles.FormHeading}>{formHeading}</h2>
+        <div>
+          {' '}
+          <label htmlFor="blogTitle">
+            Blog Title
+            <input
+              type="text"
+              id="blogTitle"
+              name="blogTitle"
+              value={blogTitle}
+              onChange={this.handleChange}
+              onFocus={this.isTouch}
+            />
+            {!errors.blogTitle
+              && isTouch.blogTitle && (
+                <p className={styles.falseMessage}>Blog title required 5-100 characters </p>
+            )}
+          </label>
+          <label htmlFor="blogDescription">
+            Blog Description
+            <input
+              type="text"
+              id="blogDescription"
+              name="blogDescription"
+              value={blogDescription}
+              onChange={this.handleChange}
+              onFocus={this.isTouch}
+            />
+            {!errors.blogDescription
+              && isTouch.blogDescription && (
+                <p className={styles.falseMessage}>Blog description required 5-100 characters </p>
+            )}
+          </label>
+          <label htmlFor="blogContent">
+            Blog Content
+            <textarea
+              rows="1"
+              cols="50"
+              type="text"
+              id="blogContent"
+              name="blogContent"
+              value={blogContent}
+              onChange={this.handleChange}
+              onFocus={this.isTouch}
+            />
+            {!errors.blogContent
+              && isTouch.blogContent && (
+                <p className={styles.falseMessage}>Blog content required 5-1000 characters </p>
+            )}
+          </label>
+          <div className={styles.BlogCategory}>
+            Categories
+            <br />
+            <React.Fragment>{renderCategoryList}</React.Fragment>
+            {!errors.categories
+              && isTouch.categories && (
+                <p className={styles.falseMessage}>Please select at least 1 categories</p>
+            )}
           </div>
-        </label>
+        </div>
         <Button buttonName="Submit" onClick={this.handleSubmit} />
         <Button buttonName="Close" onClick={this.handleClose} />
       </form>
@@ -118,6 +186,7 @@ ComponentForm.propTypes = {
   }).isRequired,
   categories: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   submitHandler: PropTypes.func.isRequired,
+  formHeading: PropTypes.string.isRequired,
 };
 
 export default ComponentForm;

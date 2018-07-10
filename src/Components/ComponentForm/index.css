@@ -17,7 +17,21 @@
   border-bottom: 1px solid var(--color-2);
   font-size: 0.9rem;
 }
-.Category{
+.Category {
   line-height: 40px;
   margin-right: 10px;
+}
+label,.BlogCategory {
+  position: relative;
+  width: 100%;
+}
+.falseMessage {
+  color: indianred;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  top: 47px;
+  left: 0;
+  right: 0;
+  font-size: 0.8rem;
 }

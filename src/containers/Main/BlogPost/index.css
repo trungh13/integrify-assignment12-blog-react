@@ -10,6 +10,9 @@
   text-align: center;
   margin: 50px;
 }
+.blogContent{
+  white-space:pre-line;
+}
 .blogPhoto {
   width: 100%;
 }

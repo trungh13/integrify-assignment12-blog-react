@@ -20,14 +20,21 @@ const Form = (props) => {
     categories: [],
     id: blogs[Object.keys(blogs).length - 1].id + 1,
   };
-  let submitHandler = () => {};
+  let submitHandler = handleSubmit;
+  let formHeading = 'Create new blogpost';
   if (id) {
     blogPost = { ...blogs[id] };
     submitHandler = handleEdit;
-  } else submitHandler = handleSubmit;
+    formHeading = 'Edit blogpost';
+  }
   return (
     <React.Fragment>
-      <ComponentForm {...props} blogPost={blogPost} submitHandler={submitHandler} />
+      <ComponentForm
+        {...props}
+        blogPost={blogPost}
+        submitHandler={submitHandler}
+        formHeading={formHeading}
+      />
     </React.Fragment>
   );
 };

@@ -9,7 +9,7 @@ const blogsReducer = (state = {}, action) => {
       return { ...state, [action.data.id]: action.data };
     }
     case 'DEL_BLOG': {
-      const { [action.currentId.toString()]: deletedBloglist, ...rest } = state;
+      const { [action.currentId.toString()]: deletedBlog, ...rest } = state;
       return rest;
     }
 
