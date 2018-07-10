@@ -84,7 +84,7 @@ const initialState = {
         Interdum posuere lorem ipsum dolor sit amet. Imperdiet massa tincidunt nunc pulvinar sapien et ligula ullamcorper malesuada. Suspendisse interdum consectetur libero id faucibus. Praesent tristique magna sit amet purus. Lectus urna duis convallis convallis. Leo a diam sollicitudin tempor id eu. Duis ultricies lacus sed turpis tincidunt id. Nulla aliquet enim tortor at auctor. Bibendum enim facilisis gravida neque. Scelerisque purus semper eget duis at tellus. Pharetra magna ac placerat vestibulum lectus. Arcu dui vivamus arcu felis bibendum. Sit amet purus gravida quis blandit turpis. Blandit turpis cursus in hac habitasse. Aliquet risus feugiat in ante metus dictum at tempor commodo. Diam in arcu cursus euismod quis viverra. Massa tincidunt nunc pulvinar sapien et ligula ullamcorper malesuada. Egestas sed sed risus pretium quam vulputate dignissim suspendisse in. At imperdiet dui accumsan sit amet nulla. Neque viverra justo nec ultrices.
         
         Nisl nunc mi ipsum faucibus vitae aliquet. Donec et odio pellentesque diam volutpat commodo. Diam maecenas ultricies mi eget mauris pharetra et ultrices neque. Neque viverra justo nec ultrices dui sapien eget mi. Enim sed faucibus turpis in eu mi bibendum neque egestas. Tellus at urna condimentum mattis pellentesque. Odio pellentesque diam volutpat commodo sed egestas egestas fringilla. Bibendum enim facilisis gravida neque convallis a cras semper. Magnis dis parturient montes nascetur. Feugiat pretium nibh ipsum consequat. Egestas dui id ornare arcu odio ut.`,
-      categories: [],
+      categories: ['tech'],
       blogDescription:
         'cupiditate quo est a modi nesciunt soluta↵ipsa vol…nam et distinctio eum↵accusamus ratione error aut',
     },

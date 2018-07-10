@@ -1,9 +1,19 @@
-.BlogList {
+.BlogsListContainer {
+  width: 90%;
   margin: auto;
+}
+.BlogsListContainer input {
+  width: 100%;
+  height: 50px;
+  border: none;
+  font-size: 1.2rem;
+  margin-bottom:30px;
+  padding-left:10px;
+}
+.BlogList {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   grid-gap: 20px;
-  width: 90%;
 }
 .BlogLink {
   text-decoration: none;
