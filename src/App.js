@@ -6,7 +6,7 @@ import Main from './containers/Main';
 import Footer from './containers/Footer';
 
 const App = () => (
-  <Router>
+  <Router basename="/integrify-assignment12-blog-react">
     <div className={styles.App}>
       <Header />
       <Main />

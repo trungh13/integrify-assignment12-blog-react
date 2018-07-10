@@ -1,5 +1,5 @@
 .Header {
-  padding:  30px;
+  padding: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -8,6 +8,10 @@
   top: 0;
   left: 0;
   right: 0;
+}
+.Heading {
+  color: var(--color-5);
+  text-decoration: none;
 }
 .ulNavLink {
   margin: 0;
