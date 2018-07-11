@@ -14,7 +14,7 @@ class ComponentForm extends Component {
       blogTitle: false,
       blogContent: false,
       blogDescription: false,
-      categories: false,
+      categories: true,
       id: false,
     },
   };
@@ -56,7 +56,7 @@ class ComponentForm extends Component {
   };
 
   validation = (blogTitle, blogContent, blogDescription, categories) => {
-    const textareaRegex = /^[A-Za-z0-9.[$&+,:;=?@#|'<>.^*()%!-\] \n]{5,1000}$/;
+    const textareaRegex = /^[A-Za-z0-9.[$&+,:;=?@#|'<>.^*()%!-\] \n\r]{5,10000}$/;
     const textRegex = /^[A-Za-z0-9.[$&+,:;=?@#|'<>.^*()%!-\] \n]{5,100}$/;
     const errors = {
       blogTitle: textRegex.test(blogTitle),
