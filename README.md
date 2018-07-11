@@ -1,7 +1,21 @@
-# trungh13-react-boilerplate
-I made the boilerplate for making my own ReactJS application. The boilerplate will update by times when Application-base need to be more mature by times.
+# React-blog
 
-trungh13-react-boilerplate was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+Making basic react-blog with React,Router and Redux. Here is [ the live demo](https://trungh13.github.io/integrify-assignment12-blog-react/) and the screenshot of application.
+![Screenshot](./screenshot.png)
+## Version
+v0.2 Implementation with ReactJS, Router, Redux ([Source code in master-react-router-redux branch](https://github.com/trungh13/integrify-assignment4-webform/tree/master))
+
+* Redo/re-structure the application with the Redux, React-redux.
+* Implement search function by the Blog title or categories( with the # in front of)
+* Deploy it to [gh-pages branch](https://github.com/trungh13/integrify-assignment12-blog-react/tree/master-react-router-redux) using [react-gh-pages](https://github.com/gitname/react-gh-pages)
+
+v0.1 React,Router ([Source code in master-react-router branch](https://github.com/trungh13/integrify-assignment12-blog-react/tree/master-react-router))
+  
+  * Make simple blogs application with ReactJS, CSS Modules, Router.
+  * In home page, there is Blog List views, and Add new Blog function
+  * In Blog list, each Blogs have title, short description and categories in the Blog list views.
+  * After clicking the Post, it goes to the Blog Post views which contain title, long content and categories with Delete, Edit button.
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -15,27 +29,11 @@ These instructions will get you a copy of the project up and running on your loc
 A step by step series of examples that tell you how to get a development env running
 
 ```
-git clone https://github.com/trungh13/trungh13-react-boilerplate.git
+git clone https://github.com/trungh13/integrify-assignment12-blog-react.git
 
-cd trungh13-react-boilerplate
+cd integrify-assignment12-blog-react
 
-npm install
+npm install && npm start
 ```
-### Using
-First of all, you need to change the package.json.
-From :
-```
-  "name": "trungh13-react-boilerplate",
-```
-To:
-```
-  "name": "your-project-name",
-```
-## 
-
-#### v0.1 create-react-app & install css-modules
-* initial boilerplate bootstrap by create-react-app
-* npm eject and modify files to use css-modules ([link to instruction](https://medium.com/nulogy/how-to-use-css-modules-with-create-react-app-9e44bec2b5c2))
-
 ---
 ©2018 Trung Hoang. Visit me on <a href="https://github.com/trungh13/">Github :octocat:</a> 
