@@ -28,14 +28,12 @@ const Form = (props) => {
     formHeading = 'Edit blogpost';
   }
   return (
-    <React.Fragment>
       <ComponentForm
         {...props}
         blogPost={blogPost}
         submitHandler={submitHandler}
         formHeading={formHeading}
       />
-    </React.Fragment>
   );
 };
 

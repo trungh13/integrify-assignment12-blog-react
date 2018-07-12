@@ -17,7 +17,7 @@ class ComponentForm extends Component {
         blogTitle: false,
         blogContent: false,
         blogDescription: false,
-        categories: true,
+        categories: false,
         id: false,
       },
     };
@@ -83,7 +83,7 @@ class ComponentForm extends Component {
 
   isTouch = (event) => {
     const elName = event.target.name;
-    if (event.target.type !== 'checkbox') {
+    if (event.target.name !== 'blogContent') {
       this.setState(prevState => ({
         ...prevState,
         isTouch: { ...prevState.isTouch, [elName]: true },
@@ -91,7 +91,7 @@ class ComponentForm extends Component {
     } else {
       this.setState(prevState => ({
         ...prevState,
-        isTouch: { ...prevState.isTouch, categories: true },
+        isTouch: { ...prevState.isTouch, categories: true, blogContent: true },
       }));
     }
   };
@@ -117,7 +117,6 @@ class ComponentForm extends Component {
         {category}
       </label>
     ));
-
     return (
       <form className={styles.FormAddNew}>
         <h2 className={styles.FormHeading}>{formHeading}</h2>
@@ -180,7 +179,11 @@ class ComponentForm extends Component {
             )}
           </div>
         </div>
-        <Button buttonName="Submit" onClick={this.handleSubmit} />
+        <Button
+          buttonName="Submit"
+          disabled={Object.values(errors).includes(false)}
+          onClick={this.handleSubmit}
+        />
         <Button buttonName="Close" onClick={this.handleClose} />
       </form>
     );
