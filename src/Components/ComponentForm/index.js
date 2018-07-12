@@ -4,26 +4,40 @@ import Button from '../ComponentButton';
 import styles from './index.css';
 
 class ComponentForm extends Component {
-  state = {
-    blogTitle: '',
-    blogContent: '',
-    blogDescription: '',
-    categories: [],
-    id: 0,
-    isTouch: {
-      blogTitle: false,
-      blogContent: false,
-      blogDescription: false,
-      categories: true,
-      id: false,
-    },
-  };
+  constructor(props) {
+    super(props);
+    const { blogs } = this.props;
+    this.state = {
+      blogTitle: '',
+      blogContent: '',
+      blogDescription: '',
+      categories: [],
+      id: blogs[Object.keys(blogs).length - 1].id + 1,
+      isTouch: {
+        blogTitle: false,
+        blogContent: false,
+        blogDescription: false,
+        categories: true,
+        id: false,
+      },
+    };
+  }
 
   componentDidMount() {
     const { blogPost } = this.props;
     this.setState({
       ...blogPost,
     });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { match } = this.props;
+
+    if (match.params.id !== nextProps.match.params.id) {
+      this.setState({
+        ...nextProps.blogPost,
+      });
+    }
   }
 
   handleChange = (event) => {
@@ -172,11 +186,23 @@ class ComponentForm extends Component {
     );
   }
 }
-
+ComponentForm.defaultProps = {
+  match: {
+    params: {
+      id: 0,
+    },
+  },
+};
 ComponentForm.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+  blogs: PropTypes.shape({}).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }),
   blogPost: PropTypes.shape({
     blogTitle: PropTypes.string.isRequired,
     blogDescription: PropTypes.string.isRequired,
